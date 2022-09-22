@@ -16,7 +16,6 @@ class UserController extends Controller
     }
     public function myProfile(){
         $user = Auth::user();
-        dd($user);
         return view('userProfile', compact('user'));
     }
 
@@ -51,6 +50,12 @@ class UserController extends Controller
                 return response()->json([
                     $errors ], 400);
             }
+    }
 
+    public function showUsers() {
+        $authUserId = Auth::user()->id;
+        $users = User::where('id', '!=', $authUserId)->get();
+
+        return view('users', compact(['users']));
     }
 }

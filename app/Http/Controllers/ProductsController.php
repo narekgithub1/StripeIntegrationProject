@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ProductsController extends Controller
@@ -36,7 +37,7 @@ class ProductsController extends Controller
 
             $product = Product::create($data);
         return ('/home');
-//            return response()->json(['message' => 'success'], 201);
+//            return response()->json(['messages' => 'success'], 201);
 //        } catch (\Exception $e) {
 //            return response()->json([
 //                $errors], 400);
@@ -45,7 +46,8 @@ class ProductsController extends Controller
 
     public function showAllProducts()
     {
-        return response()->json(Product::all());
+        $products =  Product::all();
+        return view('productList', ['products' => $products]);
     }
 
     public function showOneProduct($id)
@@ -61,7 +63,7 @@ class ProductsController extends Controller
             return response()->json($product);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => $e->getMessage()], 204);
+                'messages' => $e->getMessage()], 204);
         }
     }
 
@@ -69,7 +71,7 @@ class ProductsController extends Controller
     {
         Product::findOrFail($id)->delete();
         return response([
-            "message" => "Product successfully deleted"
+            "messages" => "Product successfully deleted"
         ]);
     }
 

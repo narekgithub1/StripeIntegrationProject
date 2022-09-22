@@ -44,7 +44,11 @@
                                     >
                                     </script>
                                 </div>
-                                <button type="button" class="btn btn-danger ml-2" onclick="cancelSubscription(`{{$item['id']}}`)">Cancel Subscription</button>
+                                @if($item['id'] === $planStripeName && $planStatus === 'active')
+                                <button type="button" class="btn btn-danger ml-2"
+                                        onclick="cancelSubscription(`{{$item['id']}}`)">Cancel Subscription
+                                </button>
+                                @endif
                             </div>
                         </form>
                         </div>

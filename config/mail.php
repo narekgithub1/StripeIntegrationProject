@@ -32,6 +32,7 @@ return [
     |            "postmark", "log", "array", "failover"
     |
     */
+//    dd(env('MAIL_USERNAME')),
 
     'mailers' => [
         'smtp' => [
@@ -98,7 +99,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Markdown Mail Settings
+    | Markdown UserLoginMail Settings
     |--------------------------------------------------------------------------
     |
     | If you are using Markdown based email rendering, you may configure your

@@ -8,11 +8,11 @@
                     <h1>{{$user->name}}</h1>
                     <h6>{{$user->email}}</h6>
                 </div>
-                <div class="d-flex justify-content-end">
+{{--                <div class="d-flex justify-content-end">--}}
 {{--                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">--}}
 {{--                        +Add Product--}}
 {{--                    </button>--}}
-                </div>
+{{--                </div>--}}
 
                 <!-- Modal -->
                 <div class="modal" id="myModal">

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\MessageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/subscribe/change', [\App\Http\Controllers\SubscriptionController::class, 'webhook']);
 Route::post('/cancel-subscription', [\App\Http\Controllers\SubscriptionController::class, 'cancelSubscription']);
+
+Route::post('/login',[UserController::class,'userLogin']);
+
+Route::middleware(['auth:api'])->group(function () {
+    Route::get('/profile-details', [UserController::class, 'userDetails']);
+});
+
+

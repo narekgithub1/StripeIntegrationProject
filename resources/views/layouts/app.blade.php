@@ -12,6 +12,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
@@ -33,11 +35,17 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex d-flex">
+                        <div class="d-flex">
                             @auth
-                            <a class="nav-link" href="{{ url('subscribe') }}">{{ __('Plans') }}</a>
+                                @if(Auth::user()->stripe_id)
+                                    <div>
+                                        <a class="nav-link" href="{{ url('products') }}">{{ __('Products') }}</a>
+                                    </div>
+                                @endif
+                                    <a class="nav-link" href="{{ url('subscribe') }}">{{ __('Plans') }}</a>
                             @endauth
+
                             @if (Route::has('subscribe'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('subscribe') }}">{{ __('Subscriptions') }}</a>
@@ -45,10 +53,6 @@
                             @endif
                         </div>
                     </div>
-                    <!-- Lefaaaaaaaaat Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">

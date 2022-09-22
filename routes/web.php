@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FlightsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserController;
 /*
@@ -24,10 +24,17 @@ Route::get('/', function () {
 Route::get('/subscribe', [SubscriptionController::class, 'index']);
 Route::get('/allPlans', [SubscriptionController::class, 'allPlans']);
 Route::post('/subscribe', [SubscriptionController::class, 'store']);
-
 Route::get('/userProfile', [UserController::class,'myProfile']);
 
 Auth::routes();
-Route::post('/insertProduct', [ProductsController::class,'create']);
 
+Route::post('/insertProduct', [ProductsController::class,'create']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/message', [MessageController::class, 'index']);
+Route::get('/all-users', [UserController::class, 'showUsers']);
+Route::post('/message/open', [MessageController::class, 'openChat']);
+Route::post('/send/message', [MessageController::class, 'sendMessage']);
+
+Route::middleware(['user.subscription'])->group(function () {
+    Route::get('/products', [ProductsController::class, 'showAllProducts']);
+});
